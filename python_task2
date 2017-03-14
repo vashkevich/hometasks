@@ -1,0 +1,75 @@
+################# Lecture's task
+
+lst = [10, 0, 1, 2, 1, 10, 2, 3, 5, 6]
+dct = {}
+for i in lst:
+    if i in dct:
+        dct[i] += 1
+    else:
+        dct[i] = 1
+for i in sorted(dct):
+    print("'%d':%d" % (i,dct[i]))
+    
+################ Home task #1
+
+l1 = [101, 102, 103, 104]
+print ("Keys' list", l1)
+l2 = ["10", "0", "1"]
+print ("Values' list", l2)
+dict = {}
+def make_dict(list1, list2):
+    print ("Dictionary creation starts")
+    dict1 = {}
+    # It works, if we have less or equal keys elements in list
+    if len(list2) >= len(list1):
+        dict1 = list(zip(list1,list2))
+    # It works, if we have more keys elements in list
+    else:
+        while len(list2) < len(list1):
+            list2.append(None)
+        dict1=list(zip(list1, list2))
+    return (dict1)
+dict = make_dict(l1, l2)
+print("Result:", dict)
+
+################ Home task #2
+
+# Load regular expressions library
+import re
+def is_palindrome(string):
+    #Make the same case for all words in our string
+    string = string.lower()
+    #Delete special charactares in our string
+    string = re.sub('[^A-Za-z0-9]+', '', string)
+    #Reverse our string
+    rev_string = ''.join(reversed(string))
+    print (rev_string)
+    return string == rev_string
+#Set the string for checking
+my_str = '747a A7   4,#$%^ 7'
+print ("--- Is this string a real polindrom?")
+#Checking and getting the answer
+print('--- YES!' if is_palindrome(my_str) else '--- NO!')
+
+################ Home task #3
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+print("This is the first list", a)
+b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+print("This is the second list", b)
+#Create a unique elements string for both A and B
+unique = list(set(a) | set(b))
+print("This is list of unique values", unique)
+
+################ Home task #4
+# Load regular expressions library
+import re
+# Load library with alternatives to Python’s general purpose built-in containers
+import collections
+# Open log-file
+f = open('/var/logs/apache_logs/access_log')
+# Find all ip-addresses in log-file
+ip_addr_list = re.findall('[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}', f.read())
+f.close()
+# Select top 10 ip-addresses and show them with the number of requests
+for i in Counter(ip_addr_list).most_common(10):
+        print("IP: %s: %s requests" % (i[0], i[1]))
